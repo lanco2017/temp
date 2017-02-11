@@ -210,7 +210,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		//全層
 		LineTemplate_firstinfo := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
-				imageURL, "我是公館教會的小天使", "我可以幫大家取得教會資訊。\n可以邀我進群組方便更多人使用。這是一種資訊整合的便捷應用。",
+				imageURL, "我是ＯＯＯ的小天使", "我可以幫大家取得教會資訊。\n可以邀我進群組方便更多人使用。這是一種資訊整合的便捷應用。",
 				linebot.NewPostbackTemplateAction("本週週報 & 聚會時間", "週報 POST","週報"),
 				linebot.NewPostbackTemplateAction("交通資訊","地圖 POST", "教會地圖"),
 				linebot.NewPostbackTemplateAction("聯絡資訊","聯絡資訊 POST", "聯絡資訊"),
@@ -583,10 +583,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				log.Print(message.Latitude)
 				log.Print("message.Longitude = ")
 				log.Print(message.Longitude)
-				//obj_message := linebot.NewLocationMessage(message.Title, message.Address, message.Latitude, message.Longitude)
-				obj_message_map := linebot.NewLocationMessage("台北公館教會", "11677 台北市汀州路四段85巷2號", " + target_x + "," + target_y + ") //台北市信義區富陽街46號
+				
 				target_x := "25.007408"
 				target_y := "121.537688"
+				//obj_message := linebot.NewLocationMessage(message.Title, message.Address, message.Latitude, message.Longitude)
+				obj_message_map := linebot.NewLocationMessage("台北ＯＯＯ", "11677 台北市汀州路四段85巷2號", " + target_x + "," + target_y + ") //台北市信義區富陽街46號
+
 
 
 				//case 1
@@ -597,16 +599,16 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if target_item == "群組對話"{
 					LineTemplate_address := linebot.NewCarouselTemplate(
 						linebot.NewCarouselColumn(
-							imageURL, "小天使來幫你帶路！", "你在「" + message.Address + "」？",
-							linebot.NewURITemplateAction("看看附近的教會？", "https://www.google.com/maps/search/%E6%95%99%E6%9C%83/@" + fmt.Sprintf("%f",message.Latitude) + "%2C" + fmt.Sprintf("%f",message.Longitude) + ",15z"),
-							linebot.NewURITemplateAction("帶你去公館教會","http://maps.google.com/maps?f=d&saddr=" + fmt.Sprintf("%f",message.Latitude) + "," + fmt.Sprintf("%f",message.Longitude) + "&daddr=" + target_x + "," + target_y + "&hl=zh-tw&dirflg=&sort=num&mrsp=0&doflg=ptk&ttype=now"),
-							linebot.NewPostbackTemplateAction("公館教會地圖","公館教會地圖 POST", "教會地圖"),
+							imageURL, "我來幫你帶路！", "你在「" + message.Address + "」？",
+//							linebot.NewURITemplateAction("看看附近的教會？", "https://www.google.com/maps/search/%E6%95%99%E6%9C%83/@" + fmt.Sprintf("%f",message.Latitude) + "%2C" + fmt.Sprintf("%f",message.Longitude) + ",15z"),
+							linebot.NewURITemplateAction("帶你去ＯＯＯ","http://maps.google.com/maps?f=d&saddr=" + fmt.Sprintf("%f",message.Latitude) + "," + fmt.Sprintf("%f",message.Longitude) + "&daddr=" + target_x + "," + target_y + "&hl=zh-tw&dirflg=&sort=num&mrsp=0&doflg=ptk&ttype=now"),
+							linebot.NewPostbackTemplateAction("ＯＯＯ地圖","ＯＯＯ地圖 POST", "教會地圖"),
 						),
 						// LineTemplate_other_example,
 						// LineTemplate_other,
 						LineTemplate_CarouselColumn_feedback,
 					)
-					t_address := "帶你去公館教會！\nhttp://maps.google.com/maps?f=d&saddr=" + fmt.Sprintf("%f",message.Latitude) + "," + fmt.Sprintf("%f",message.Longitude) + "&daddr=" + target_x + "," + target_y + "&hl=zh-tw&dirflg=&sort=num&mrsp=0&doflg=ptk&ttype=now"
+					t_address := "帶你去ＯＯＯ！\nhttp://maps.google.com/maps?f=d&saddr=" + fmt.Sprintf("%f",message.Latitude) + "," + fmt.Sprintf("%f",message.Longitude) + "&daddr=" + target_x + "," + target_y + "&hl=zh-tw&dirflg=&sort=num&mrsp=0&doflg=ptk&ttype=now"
 					obj_message_address := linebot.NewTemplateMessage(t_address, LineTemplate_address)
 					if _, err = bot.ReplyMessage(
 						event.ReplyToken, 

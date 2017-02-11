@@ -7,7 +7,7 @@ import (
 
 	"net/http"
 	"os"
-	"regexp"
+	//"regexp"
 
 	"strconv"
 	"strings"
@@ -189,6 +189,17 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		// 300 * 1.51 = 453 (用 300 當短)
 
 		//LineTemplate_chat := linebot.NewURITemplateAction("線上與開發者聊天", "http://www.smartsuppchat.com/widget?key=77b943aeaffa11a51bb483a816f552c70e322417&vid=" + target_id_code + "&lang=tw&pageTitle=%E9%80%99%E6%98%AF%E4%BE%86%E8%87%AA%20LINE%40%20%E9%80%B2%E4%BE%86%E7%9A%84%E5%8D%B3%E6%99%82%E9%80%9A%E8%A8%8A")
+
+		imageURL := "https://trello-attachments.s3.amazonaws.com/52ff05f27a3c676c046c37f9/585e3fb981c1240b4df88d73/34fba56ed5cbb5d7f0a9d7d2543ff238/C02018kong-koan_8481.JPG" //單位圖
+		SystemImageURL := "https://trello-attachments.s3.amazonaws.com/52ff05f27a3c676c046c37f9/5831e5e304f9fac88ac50a23/d390ae079971c82074b5174c98899e9e/2017.png"
+
+		LineTemplate_CarouselColumn_feedback := linebot.NewCarouselColumn(
+			SystemImageURL, "意見回饋 feedback", "你可以透過此功能\n對 LINE 機器人的 開發者 提出建議\n或錯誤回報、其他提案。",
+			LineTemplate_addme,
+			LineTemplate_chat,
+			//linebot.NewMessageTemplateAction("聯絡 LINE 機器人開發者", "開發者"),
+			linebot.NewPostbackTemplateAction("發訊息給教會", "取得發訊息給教會的提示",""),
+		)
 
 		//正題
 
